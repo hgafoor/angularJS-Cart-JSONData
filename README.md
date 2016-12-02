@@ -7,5 +7,5 @@ json data support to it.
 Changes
 -------
 * changed the project back to HTML + JS + CSS + JSON + IMG files 
-* changed angular code sections to include json file  the source of data.
+* changed angular code sections to include json files as the source of data.
 ** working on changing the project to use angularJS alone for JS tasks, removing parts using jQuery.

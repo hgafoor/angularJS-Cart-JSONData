@@ -1,0 +1,55 @@
+<div class="container products-page">
+      <div class="row filter-box">
+          <h3>Filters</h3>
+          <div class="col-md-3"><h4>Category 1 </h4></div>
+          <div class="col-md-3"><h4>Category 2</h4></div>
+          <div class="col-md-3"><h4>Category 3</h4></div>
+          <div class="col-md-3"><h4>Category 4</h4></div>
+      </div>
+
+      <div class="row products-lists">
+        <div class="col-md-4 col-sm-6 img-product" ng-repeat="prod in products" ng-if="prod.category == 'women'" >
+                <img ng-src="{{prod.photo}}" alt="No Image Available" class="img-responsive" />
+            <div class="caption text-center"><a href="#/products/{{prod.id}}"><b>{{prod.name}}</b></a><br /></div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<table class="table table-bordered">
+    <tr class="well">
+        <td class="tdRight" colspan="4" >
+            <a href="default.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+    <tr ng-repeat="product in products" >
+        <td class="tdCenter"><img ng-src="{{product.photo}}" alt="{{product.name}}" /></td>
+        <td>
+            <a href="#/products/{{product.id}}"><b>{{product.name}}</b></a><br />
+            {{product.desc}}
+        </td>
+        <td class="tdRight">
+            {{product.price | currency}}
+        </td>
+        <td class="tdCenter">
+            <a href="" ng-click="cart.addItem(product.id, product.name, product.price, 1)">
+                add to cart
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="tdRight" colspan="4">
+            <a href="default.html#/cart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>

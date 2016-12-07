@@ -1,9 +1,11 @@
 ﻿//----------------------------------------------------------------
 // shopping cart
 //
-function shoppingCart(cartName,$http, $q) {
-    this.$http = $http;
-    this.$q = $q;
+
+function shoppingCart(cartName) {
+  //  this.$http = $http;
+  //  this.$q = $q;
+    //this.$window = $window;
     this.cartName = cartName;
     this.clearCart = false;
     this.checkoutParameters = {};
@@ -14,15 +16,23 @@ function shoppingCart(cartName,$http, $q) {
 
     // save items to local storage when unloading
     var self = this;
-    $(window).unload(function () {
+
+    window.onbeforeunload = function(e) {
+      if (self.clearCart) {
+          self.clearItems();
+      }
+      self.saveItems();
+      self.clearCart = false;
+}
+  /*  $(window).unload(function () {
         if (self.clearCart) {
             self.clearItems();
         }
         self.saveItems();
         self.clearCart = false;
     });
+*/
 }
-
 // load items from local storage
 shoppingCart.prototype.loadItems = function () {
     var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;
@@ -79,6 +89,7 @@ shoppingCart.prototype.addItem = function (id, name, price, quantity) {
     }
 }
 
+
 // get the total price for all items currently in the cart
 shoppingCart.prototype.getTotalPrice = function (id) {
     var total = 0;
@@ -102,6 +113,8 @@ shoppingCart.prototype.getTotalCount = function (id) {
     }
     return count;
 }
+
+
 
 // clear the cart
 shoppingCart.prototype.clearItems = function () {
@@ -260,6 +273,7 @@ function checkoutParameters(serviceName, merchantID, options) {
 //----------------------------------------------------------------
 // items in the cart
 //
+
 function cartItem(id, name, price, quantity) {
     this.id = id;
     this.name = name;
